@@ -320,4 +320,9 @@ export class EventServiceService {
   getEvents(){
     return this.events
   }
+
+  getEvent(eventId){
+     return this.events.find(event=> event.id==eventId );
+
+  }
 }

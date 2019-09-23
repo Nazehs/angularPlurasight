@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'event-thumbnail',
-  template: `<div class=" thumbnail hoverwell well">
+  template: `<div class=" thumbnail hoverwell well" [routerLink]="['/events', event.id]">
   <div class="">
         <button class="btn btn-primary" (click)="handleClick()">Click Me</button>
   </div>
+  <div>
   <h2>{{event?.name}}</h2>
   <div class=""> Date: 
   {{event?.date}}
@@ -26,6 +28,7 @@ import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
     <span>{{event?.location?.country}}</span>
 
   </div>
+  </div>
   </div>`,
   styleUrls: ['./event-thumbnail.component.css']
 })
@@ -34,7 +37,11 @@ export class EventThumbnailComponent implements OnInit {
 
   @Output() eventBtn = new EventEmitter();
 
-  constructor() { }
+  constructor(private toastr: ToastrService) {}
+ 
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
+  }
 
   ngOnInit() {
   }
