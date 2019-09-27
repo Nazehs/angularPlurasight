@@ -1,0 +1,20 @@
+<!-- <h4 *ngIf="sessions.length> 0">Program/Event Session(s)</h4> -->
+<div class="row" *ngFor="let session of sessions">
+  <div class="col-md-10">
+    <div class="well">
+      <collapsable-session-well>
+        <div well-session-title>
+          {{session.name}}
+          <i *ngIf="session.voters.length > 2" class="glyphicon glyphicon-fire" style="color:red"></i>
+        </div>
+
+        <div well-session-body>
+          <h6>{{session.presenter}}</h6>
+          <span>Duration: {{session.duration}}</span><br />
+          <span>Level: {{session.level}}</span>
+          <p>{{session.abstract}}</p>
+        </div>
+      </collapsable-session-well>
+    </div>
+  </div>
+</div>

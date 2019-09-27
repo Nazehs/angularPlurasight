@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { eventsModel } from '../shared/event.model';
 
 @Component({
   selector: 'event-thumbnail',
@@ -21,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
   <div class=""> Price: \$
   {{event?.price}}
   </div>
-  <div class=""> 
+  <div class=""> Location: 
     <span>{{event?.location?.address}}</span>, 
     &nbsp;
     <span class="padding-left"n>{{event?.location?.city}}</span>,
@@ -33,12 +34,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./event-thumbnail.component.css']
 })
 export class EventThumbnailComponent implements OnInit {
-  @Input() event: any
+  @Input() event: eventsModel
 
   @Output() eventBtn = new EventEmitter();
 
-  constructor(private toastr: ToastrService) {}
- 
+  constructor(private toastr: ToastrService) { }
+
   showSuccess() {
     this.toastr.success('Hello world!', 'Toastr fun!');
   }
@@ -54,8 +55,8 @@ export class EventThumbnailComponent implements OnInit {
 
   }
 
-  getStartTimes(){
-    const isStartTime = this.event && this.event.time =='8:00 am';
-     return {bold:isStartTime, color:isStartTime};
+  getStartTimes() {
+    const isStartTime = this.event && this.event.time == '8:00 am';
+    return { bold: isStartTime, color: isStartTime };
   }
 }

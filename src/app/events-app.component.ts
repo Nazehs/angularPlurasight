@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EventServiceService } from './event-service.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'events-app',
@@ -16,7 +15,7 @@ export class EventAppComponent {
 
   events:any;
 
-  constructor(public eventService:EventServiceService, public toastrService: ToastrService) { }
+  constructor(public toastrService: ToastrService) { }
 
   ngOnInit() {
 

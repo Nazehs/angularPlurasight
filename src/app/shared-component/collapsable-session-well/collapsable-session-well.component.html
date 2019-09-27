@@ -1,0 +1,10 @@
+<div class="well pointable" (click)="toggleContent()">
+  <h4>
+    <ng-content select="[well-session-title]">
+
+    </ng-content>
+  </h4>
+  <!-- get angular to project the content here  -->
+  <ng-content select="[well-session-body]" #name *ngIf="isContentVisible"></ng-content>
+
+</div>
