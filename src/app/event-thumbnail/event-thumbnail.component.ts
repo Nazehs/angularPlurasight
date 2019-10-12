@@ -5,22 +5,19 @@ import { eventsModel } from '../shared/event.model';
 @Component({
   selector: 'event-thumbnail',
   template: `<div class=" thumbnail hoverwell well" [routerLink]="['/events', event.id]">
-  <div class="">
-        <button class="btn btn-primary" (click)="handleClick()">Click Me</button>
-  </div>
   <div>
-  <h2>{{event?.name}}</h2>
+  <h2>{{event?.name | uppercase}}</h2>
   <div class=""> Date: 
   {{event?.date}}
   </div>
   <div class="" [ngClass]="getStartTimes()" [ngSwitch]="event?.time"> Time: 
-  {{event?.time}}
+  {{event?.time | duration}}
   <span *ngSwitchCase="'8:00 am'">(Early start)</span>
   <span *ngSwitchDefault>(Normal start)</span>
   <span *ngSwitchCase="'10:00 am'">(Late start)</span>
   </div>
-  <div class=""> Price: \$
-  {{event?.price}}
+  <div class=""> Price: 
+  {{event?.price | currency:'INR'}}
   </div>
   <div class=""> Location: 
     <span>{{event?.location?.address}}</span>, 

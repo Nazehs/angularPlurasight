@@ -18,7 +18,7 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a href="">Angular Connect</a>
+              <a>Angular ng Nigeria</a>
             </li>
           </ul>
         </li>
@@ -32,14 +32,22 @@
           </li>
         </ul>
       </div>
-      <form id="searchForm" class="navbar-form navbar-right">
+      <form id="searchForm" (ngSubmit)="searchSessions(searchTerm)" class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search Sessions">
+          <input type="text" class="form-control" [(ngModel)]="searchTerm" name="searchTerm"
+            placeholder="Search Sessions">
         </div>
-        <button class="btn btn-default">
+        <button class="btn btn-default" trigger-modal="searchResults">
           Search
         </button>
       </form>
     </div>
   </div>
 </div>
+<search-modal class="modalsearch" onBodyCLickCLose="true" elementId="searchResults" title="Search Results"
+  style="background: red">
+  <div class="list-group">
+    <a class="list-group-item" routerLink="/events/{{session.eventId}}"
+      *ngFor="let session of foundSessions">{{session.name}}</a>
+  </div>
+</search-modal>

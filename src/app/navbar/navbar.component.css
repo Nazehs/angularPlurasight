@@ -10,6 +10,14 @@ li > a.active{
     color: #f97924!important;
 }
 
+.modalsearch{
+    background: red;
+    /* color: red!important; */
+}
+body{
+background: transparent!important;
+}
+
 @media (max-width:1200px){
     #searchForm{
         display: none;

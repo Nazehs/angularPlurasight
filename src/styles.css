@@ -36,3 +36,11 @@
   .toast-warning {
     background-color: #f89406;
   }
+  .modal-body{
+    /* height:250px!important; */
+    overflow-y:scroll;
+  }
+  .modal-backdrop{
+ background: rgba(0, 0, 0, 0.6)
+  /* background: none!important; */
+  }

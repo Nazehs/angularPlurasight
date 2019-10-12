@@ -13,3 +13,9 @@ export * from './event.model'
 export * from '../create-session/create-session.component';
 export * from '../session-list/session-list.component';
 export * from '../shared-component/collapsable-session-well/collapsable-session-well.component';
+export * from '../shared-component/trigger-modal.directive'
+export * from '../shared/user.auth.service';
+export * from '../create-session/create-session.component';
+export * from '../shared/duration.pipe';
+export * from '../shared/jquery.service'
+export * from '../shared-component/search-modal.component'

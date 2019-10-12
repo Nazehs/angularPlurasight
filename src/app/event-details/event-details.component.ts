@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventServiceService } from '../providers/event-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { eventsModel } from '../shared/event.model';
 
 @Component({
@@ -11,11 +11,23 @@ import { eventsModel } from '../shared/event.model';
 export class EventDetailsComponent implements OnInit {
   event: eventsModel;
   isAddSessionMode: boolean = false;
+  filterBy: string = 'all';
+  sortBy: string = 'votes';
   constructor(private eventService: EventServiceService, public route: ActivatedRoute) { }
 
   ngOnInit() {
-    //  thi
-    this.event = this.eventService.getEvent(this.route.snapshot.params['eventId']);
+    // subscribe to the chances in the routes to navigate to the same event
+    this.route.data.forEach((data) => {
+      this.event = data['event']
+      this.isAddSessionMode = false;
+      // this.eventService.getEvent(+params['eventId']).subscribe((event: eventsModel) => {
+      //   this.event = event;
+      //   // console.log(this.event)
+      // });
+
+    })
+    //  this will load the clicked event
+    // this.event = this.eventService.getEvent(this.route.snapshot.params['eventId']);
   }
   addSessionMode() {
     this.isAddSessionMode = true;
@@ -26,7 +38,7 @@ export class EventDetailsComponent implements OnInit {
     newSession.id = nextId + 1;
     console.log(nextId);
     this.event.sessions.push(newSession);
-    this.eventService.updateEvent(this.event);
+    this.eventService.saveEvent(this.event).subscribe();
 
     this.isAddSessionMode = false;
   }

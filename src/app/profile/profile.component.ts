@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { USerAuthService } from "../shared/user.auth.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
@@ -24,6 +25,7 @@ import { Router } from "@angular/router";
   
         <button type="submit" class="btn btn-primary">Save</button>
         <button type="button" class="btn btn-default">Cancel</button>
+         <button (click)="logout()" type="button" style="float:right" class="btn btn-warning">Logout</button>
       </form>
     </div>
   </div>`,
@@ -46,7 +48,7 @@ export class ProfileComponent implements OnInit {
     private firstName;
     private lastName;
 
-    constructor(private auth: USerAuthService, private router: Router) { }
+    constructor(private auth: USerAuthService, private router: Router, private toastr: ToastrService) { }
 
     ngOnInit() {
         this.firstName = new FormControl(this.auth.currentUser.firstName, [Validators.required, Validators.pattern('[a-zA-Z].*')]);
@@ -60,9 +62,12 @@ export class ProfileComponent implements OnInit {
 
     saveProfile(data) {
         if (this.profileForm.valid) {
-            console.log(data);
-            this.auth.updateCurrentUser(data.firstName, data.lastName);
-            this.router.navigate(['/events']);
+            console.log('success');
+            this.auth.updateCurrentUser(data.firstName, data.lastName).subscribe(() => {
+                this.toastr.success('Profile Details Updated!')
+                // this.toastr.success('Hello world!', 'Toastr fun!');
+                this.router.navigate(['/events']);
+            })
         }
 
     }
@@ -78,5 +83,10 @@ export class ProfileComponent implements OnInit {
     cancelEdit() {
         this.router.navigate(['/events']);
 
+    }
+    logout = () => {
+        this.auth.logout().subscribe(() => {
+            this.router.navigate([''])
+        })
     }
 }
